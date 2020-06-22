@@ -1,50 +1,51 @@
-import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-import { CardActionArea } from "@material-ui/core";
-import ExpandedCard from "./ExpandedCard";
-import Grow from "@material-ui/core/Grow";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-function newsCard(props) {
-  const [clickState, setClickState] = useState(false);
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
+});
 
-  function handleClick() {
-    setClickState(!clickState);
-  }
+export default function NewsCard() {
+  const classes = useStyles();
 
   return (
-    <div>
-      <Grow in={true} timeout={{ appear: 1000, enter: 1000, exit: 1000 }}>
-        <CardActionArea onClick={handleClick}>
-          <Card
-            key={props.id}
-            className="shadow m-4"
-            bg="light"
-            text="black"
-            style={{ width: "20rem" }}
-          >
-            <Card.Header as="h5">{props.codeLanguage}</Card.Header>
-            <Card.Body>
-              <Card.Text>{props.question}</Card.Text>
-              <Card.Text>
-                <a
-                  href={props.projectUrl}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {props.projectUrl}
-                </a>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </CardActionArea>
-      </Grow>
-      <ExpandedCard
-        clickState={clickState}
-        cardProps={props}
-        handleClick={handleClick}
-      />
-    </div>
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image="/static/images/cards/contemplative-reptile.jpg"
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            Lizard
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+            across all continents except Antarctica
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+        <Button size="small" color="primary">
+          Learn More
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
-
-export default newsCard;

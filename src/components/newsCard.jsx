@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function NewsCard() {
+function NewsCard(props) {
   const classes = useStyles();
 
   return (
@@ -26,11 +26,11 @@ export default function NewsCard() {
         <CardMedia
           className={classes.media}
           image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
+          title={props.title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {props.content}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
@@ -49,3 +49,5 @@ export default function NewsCard() {
     </Card>
   );
 }
+
+export default NewsCard;
